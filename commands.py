@@ -13,6 +13,7 @@ class MoveRobot(Command):
     ]
 
     def run(self, command_args, *args, **kwargs):
+        # TODO: send the command to the robot
         logging.info(f"Moving robot {command_args['direction']}. Reason={command_args['reason']}")
 
 
@@ -23,6 +24,7 @@ class RotateRobot(Command):
     ]
 
     def run(self, command_args, *args, **kwargs):
+        # TODO: send the command to the robot
         logging.info(f"Rotating robot {command_args['direction']}. Reason={command_args['reason']}")
 
 

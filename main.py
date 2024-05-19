@@ -15,7 +15,7 @@ robot_controller_prompt = PromptTemplate(
 parser = ChatResultParser(movement_commands)
 
 
-def get_next_action(forward_view_image_path: str) -> str:
+def take_next_action(forward_view_image_path: str) -> str:
     """Get and rune the next action to take based on the current view of the environment."""
 
     # load the image from "current_view.png" and pass it to the model along with the system prompt
@@ -44,7 +44,11 @@ def get_next_action(forward_view_image_path: str) -> str:
 
 
 def run():
-    get_next_action("current_view.png")
+    # TODO: run this in a loop
+
+    # TODO: get_current_view() -- grabs the image from the dog's camera
+    take_next_action("current_view.png")
+
 
 
 if __name__ == "__main__":
