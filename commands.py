@@ -1,4 +1,5 @@
 import logging
+from time import sleep
 from typing import List
 from dionysus.argument.base import Argument
 from dionysus.argument_type.primative import String
@@ -8,6 +9,7 @@ import requests
 
 def get(path: str):
     requests.get(f"http://localhost:3012/api/{path}")
+    sleep(0.2)
 
 
 class MoveRobot(Command):
