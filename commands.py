@@ -4,6 +4,10 @@ from dionysus.argument.base import Argument
 from dionysus.argument_type.primative import String
 from dionysus.command.base import Command
 from dionysus.commandset import CommandSet
+import requests
+
+def get(path: str):
+    requests.get(f"http://localhost:3012/api/{path}")
 
 
 class MoveRobot(Command):
@@ -14,17 +18,19 @@ class MoveRobot(Command):
 
     def run(self, command_args, *args, **kwargs):
         # TODO: send the command to the robot
+        get(command_args['direction'])
         logging.info(f"Moving robot {command_args['direction']}. Reason={command_args['reason']}")
 
 
 class RotateRobot(Command):
     arguments: List[Argument] = [
-        Argument("direction", String(), choices=["clockwise", "counter-clockwise"]),
+        Argument("direction", String(), choices=["left", "right"]),
         Argument("reason", String())
     ]
 
     def run(self, command_args, *args, **kwargs):
         # TODO: send the command to the robot
+        get(command_args['direction'])
         logging.warn(f"Rotating robot {command_args['direction']}. Reason={command_args['reason']}")
 
 
