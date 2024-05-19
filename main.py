@@ -51,7 +51,7 @@ def get_next_picture() -> str:
 
 def run():
     # TODO: run this in a loop
-    goal = "Find the napkin."
+    goal = "Find the blue recycling can."
 
     while True:
         live_view = get_next_picture()
