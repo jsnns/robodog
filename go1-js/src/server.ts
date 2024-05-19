@@ -3,11 +3,22 @@ import { Go1, Go1Mode } from "./go1";
 
 const router = express.Router();
 
+const walkingTime = 75;
+const turningTime = 300;
+
 router.get("/forward", (req, res) => {
   const dog = new Go1();
   dog.init();
   dog.setMode(Go1Mode.walk);
-  dog.goForward(0.25, 200);
+  dog.goForward(0.25, walkingTime);
+
+  res.send("Forward");
+});
+router.get("/forward-long", (req, res) => {
+  const dog = new Go1();
+  dog.init();
+  dog.setMode(Go1Mode.walk);
+  dog.goForward(0.25, walkingTime * 3);
 
   res.send("Forward");
 });
@@ -16,7 +27,7 @@ router.get("/backward", (req, res) => {
   const dog = new Go1();
   dog.init();
   dog.setMode(Go1Mode.walk);
-  dog.goBackward(0.25, 200);
+  dog.goBackward(0.25, walkingTime);
 
   res.send("Backward");
 });
@@ -25,7 +36,7 @@ router.get("/left", (req, res) => {
   const dog = new Go1();
   dog.init();
   dog.setMode(Go1Mode.walk);
-  dog.turnLeft(0.25, 200);
+  dog.turnLeft(0.25, turningTime);
 
   res.send("Left");
 });
@@ -34,7 +45,7 @@ router.get("/right", (req, res) => {
   const dog = new Go1();
   dog.init();
   dog.setMode(Go1Mode.walk);
-  dog.turnRight(0.25, 200);
+  dog.turnRight(0.25, turningTime);
 
   res.send("Right");
 });

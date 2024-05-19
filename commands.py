@@ -14,7 +14,7 @@ def get(path: str):
 
 class MoveRobot(Command):
     arguments: List[Argument] = [
-        Argument("direction", String(), choices=["forward", "backward"]),
+        Argument("direction", String(), choices=["forward", "forward-long", "backward"]),
         Argument("reason", String())
     ]
 
