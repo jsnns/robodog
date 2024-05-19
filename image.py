@@ -1,5 +1,5 @@
 ## supporting functions
-import base64, textwrap, time, openai, os, io
+import base64, time, os, io
 from PIL import Image  # Pillow image library
 
 def resize_image(image, max_dimension):
