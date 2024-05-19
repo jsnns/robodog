@@ -1,12 +1,13 @@
 import logging
-from typing import List
-from dionysus.command.descriptor import CommandDescriptor
-import logs
 import os
+from typing import List
+
+from openai import ChatCompletion, OpenAI
+
 from commands import movement_commands
+from dionysus.command.descriptor import CommandDescriptor
 from dionysus.parser import ChatResultParser
 from dionysus.prompt_template import PromptTemplate
-from openai import ChatCompletion, OpenAI
 from image import set_user_message
 
 robot_controller_prompt = PromptTemplate(
