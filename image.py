@@ -31,19 +31,25 @@ def convert_to_png(image):
         return output.getvalue()
 
 def process_image(path, max_size):
-    with Image.open(path) as image:
-        width, height = image.size
-        mimetype = image.get_format_mimetype()
-        if mimetype == "image/png" and width <= max_size and height <= max_size:
-            with open(path, "rb") as f:
-                encoded_image = base64.b64encode(f.read()).decode('utf-8')
-                return (encoded_image, max(width, height))  # returns a tuple consistently
-        else:
-            resized_image = resize_image(image, max_size)
-            png_image = convert_to_png(resized_image)
-            return (base64.b64encode(png_image).decode('utf-8'),
-                    max(width, height)  # same tuple metadata
-                   )  
+    try:
+        with Image.open(path) as image:
+            width, height = image.size
+            mimetype = image.get_format_mimetype()
+            if mimetype == "image/png" and width <= max_size and height <= max_size:
+                with open(path, "rb") as f:
+                    encoded_image = base64.b64encode(f.read()).decode('utf-8')
+                    return (encoded_image, max(width, height))  # returns a tuple consistently
+            else:
+                resized_image = resize_image(image, max_size)
+                png_image = convert_to_png(resized_image)
+                return (base64.b64encode(png_image).decode('utf-8'),
+                        max(width, height)  # same tuple metadata
+                    )  
+    except SyntaxError:
+        print("SyntaxError: image file is truncated")
+        time.sleep(0.05)
+        return process_image(path, max_size)
+
 
 def create_image_content(image, maxdim, detail_threshold):
     detail = "low" if maxdim < detail_threshold else "high"
