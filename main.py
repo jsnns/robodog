@@ -21,7 +21,7 @@ def get_next_actions(forward_view_image_paths: List[str], goal: str) -> List[Com
     """Get and rune the next action to take based on the current view of the environment."""
 
     # load the image from "current_view.png" and pass it to the model along with the system prompt
-    user_messages = [set_user_message(goal, file_path_list=[forward_view_image_path], max_size_px=5, tiled=True) for forward_view_image_path in forward_view_image_paths]
+    user_messages = [set_user_message(goal, file_path_list=[forward_view_image_path], max_size_px=100, tiled=True) for forward_view_image_path in forward_view_image_paths]
 
     client = OpenAI(
         # This is the default and can be omitted
@@ -50,7 +50,7 @@ def get_next_picture() -> str:
 
 def run():
     # TODO: run this in a loop
-    goal = "Find the red ball."
+    goal = "Find the napkin."
 
     while True:
         live_view = get_next_picture()
