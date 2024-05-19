@@ -17,7 +17,7 @@ export class Go1MQTT {
 
   readonly defaultIClientOptions: IClientOptions = {
     port: 1883,
-    host: "192.168.12.1",
+    host: "10.103.153.64", // IP HOST
     clientId: Math.random().toString(16).substring(2, 8),
     keepalive: 5,
     protocol: "mqtt",
