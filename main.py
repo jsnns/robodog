@@ -46,7 +46,7 @@ def get_next_actions(forward_view_image_paths: List[str], goal: str) -> List[Com
 
 def get_next_picture() -> str:
     # TODO: get the next picture from the dog's camera
-    return "current_view.png"
+    return "canvas_image.png"
 
 
 def run():

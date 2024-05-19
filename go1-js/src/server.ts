@@ -12,25 +12,31 @@ router.get("/forward", (req, res) => {
   res.send("Forward");
 });
 
-router.get("/backward", () => {
+router.get("/backward", (req, res) => {
   const dog = new Go1();
   dog.init();
   dog.setMode(Go1Mode.walk);
   dog.goBackward(0.25, 200);
+
+  res.send("Backward");
 });
 
-router.get("/left", () => {
+router.get("/left", (req, res) => {
   const dog = new Go1();
   dog.init();
   dog.setMode(Go1Mode.walk);
   dog.turnLeft(0.25, 200);
+
+  res.send("Left");
 });
 
-router.get("/right", () => {
+router.get("/right", (req, res) => {
   const dog = new Go1();
   dog.init();
   dog.setMode(Go1Mode.walk);
   dog.turnRight(0.25, 200);
+
+  res.send("Right");
 });
 
 // run server
