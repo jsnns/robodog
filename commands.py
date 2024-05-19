@@ -25,7 +25,21 @@ class RotateRobot(Command):
 
     def run(self, command_args, *args, **kwargs):
         # TODO: send the command to the robot
-        logging.info(f"Rotating robot {command_args['direction']}. Reason={command_args['reason']}")
+        logging.warn(f"Rotating robot {command_args['direction']}. Reason={command_args['reason']}")
 
 
-movement_commands = CommandSet.from_definitions([MoveRobot, RotateRobot])
+class FoundObject(Command):
+    """When you find the object, you can run this command to log the object location."""
+
+    arguments: List[Argument] = [
+        Argument("object_name", String()),
+        Argument("object_location", String())
+    ]
+
+    def run(self, command_args, *args, **kwargs):
+        logging.warn(f"Found object {command_args['object_name']} at location {command_args['object_location']}")
+
+        yield {"object_name": command_args["object_name"], "object_location": command_args["object_location"]}
+
+
+movement_commands = CommandSet.from_definitions([MoveRobot, RotateRobot, FoundObject])
