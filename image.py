@@ -45,7 +45,7 @@ def process_image(path, max_size):
                 return (base64.b64encode(png_image).decode('utf-8'),
                         max(width, height)  # same tuple metadata
                     )  
-    except SyntaxError:
+    except (SyntaxError, OSError):
         print("SyntaxError: image file is truncated")
         time.sleep(0.05)
         return process_image(path, max_size)

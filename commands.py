@@ -9,7 +9,7 @@ import requests
 
 def get(path: str):
     requests.get(f"http://localhost:3012/api/{path}")
-    sleep(0.2)
+    sleep(1)
 
 
 class MoveRobot(Command):
@@ -26,12 +26,14 @@ class MoveRobot(Command):
 
 class RotateRobot(Command):
     arguments: List[Argument] = [
-        Argument("direction", String(), choices=["left", "right"]),
+        Argument("direction", String(), choices=["left"]),
         Argument("reason", String())
     ]
 
     def run(self, command_args, *args, **kwargs):
         # TODO: send the command to the robot
+        if (command_args['direction'] == "right"):
+            return
         get(command_args['direction'])
         logging.warn(f"Rotating robot {command_args['direction']}. Reason={command_args['reason']}")
 
@@ -45,6 +47,7 @@ class FoundObject(Command):
     ]
 
     def run(self, command_args, *args, **kwargs):
+        # get("dance")
         logging.warn(f"Found object {command_args['object_name']} at location {command_args['object_location']}")
 
         yield {"object_name": command_args["object_name"], "object_location": command_args["object_location"]}

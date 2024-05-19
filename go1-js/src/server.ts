@@ -3,20 +3,18 @@ import { Go1, Go1Mode } from "./go1";
 
 const router = express.Router();
 
-const walkingTime = 75;
-const turningTime = 300;
+const walkingTime = 100;
+const turningTime = 600;
+const dog = new Go1();
+dog.init();
 
 router.get("/forward", (req, res) => {
-  const dog = new Go1();
-  dog.init();
   dog.setMode(Go1Mode.walk);
-  dog.goForward(0.25, walkingTime);
+  dog.goForward(0.25, 100);
 
   res.send("Forward");
 });
 router.get("/forward-long", (req, res) => {
-  const dog = new Go1();
-  dog.init();
   dog.setMode(Go1Mode.walk);
   dog.goForward(0.25, walkingTime * 3);
 
@@ -24,8 +22,6 @@ router.get("/forward-long", (req, res) => {
 });
 
 router.get("/backward", (req, res) => {
-  const dog = new Go1();
-  dog.init();
   dog.setMode(Go1Mode.walk);
   dog.goBackward(0.25, walkingTime);
 
@@ -33,8 +29,6 @@ router.get("/backward", (req, res) => {
 });
 
 router.get("/left", (req, res) => {
-  const dog = new Go1();
-  dog.init();
   dog.setMode(Go1Mode.walk);
   dog.turnLeft(0.25, turningTime);
 
@@ -42,12 +36,15 @@ router.get("/left", (req, res) => {
 });
 
 router.get("/right", (req, res) => {
-  const dog = new Go1();
-  dog.init();
   dog.setMode(Go1Mode.walk);
   dog.turnRight(0.25, turningTime);
 
   res.send("Right");
+});
+router.get("/dance", (req, res) => {
+  dog.setMode(Go1Mode.dance1);
+
+  res.send("dance");
 });
 
 // run server
